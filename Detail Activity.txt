@@ -1,0 +1,59 @@
+package com.example.recycleview_dahlanhendarta;
+
+import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.bumptech.glide.Glide;
+
+public class DetailActivity extends AppCompatActivity {
+
+    ImageView imageviewfoto;
+    TextView judul, infoPersonal;
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detail);
+
+        imageviewfoto = findViewById(R.id.imageviewfoto);
+        judul = findViewById(R.id.judul);
+        infoPersonal = findViewById(R.id.infoPersonal);
+
+        getIncomingExtra();
+
+    }
+
+    private void getIncomingExtra(){
+        if(getIntent().hasExtra("foto_Personal") && getIntent().hasExtra("nama_Personal") && getIntent().hasExtra("info_Personal1")){
+
+            String fotoPersonal = getIntent().getStringExtra("foto_Personal");
+            String namaPersonal = getIntent().getStringExtra("nama_Personal");
+            String infoPersonal1 = getIntent().getStringExtra("info_Personal1");
+
+            setDataActivity(fotoPersonal, namaPersonal, infoPersonal1);
+
+        }
+    }
+
+    private void setDataActivity(String fotoPersonal, String namaPersonal, String infoPersonal1){
+
+
+        Glide.with(this).asBitmap().load(fotoPersonal).into(imageviewfoto);
+
+        
+        judul.setText(namaPersonal);
+        infoPersonal.setText(infoPersonal1);
+
+
+
+
+
+
+    }
+
+}
